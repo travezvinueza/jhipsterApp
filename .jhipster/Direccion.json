@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20230210210930",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "direccion",
+  "fields": [
+    {
+      "fieldName": "calle",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "codigoPostal",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ciudad",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "provincia",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "javadoc": "comentario de un parrafo",
+  "jpaMetamodelFiltering": false,
+  "name": "Direccion",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "pais",
+      "ownerSide": true,
+      "relationshipName": "pais",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

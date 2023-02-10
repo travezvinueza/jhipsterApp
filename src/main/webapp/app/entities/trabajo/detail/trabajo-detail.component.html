@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="trabajo">
+      <h2 data-cy="trabajoDetailsHeading"><span jhiTranslate="jhipsterApp.trabajo.detail.title">Trabajo</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ trabajo.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.trabajo.tituloTrabajo">Titulo Trabajo</span></dt>
+        <dd>
+          <span>{{ trabajo.tituloTrabajo }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.trabajo.salarioMin">Salario Min</span></dt>
+        <dd>
+          <span>{{ trabajo.salarioMin }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.trabajo.salarioMax">Salario Max</span></dt>
+        <dd>
+          <span>{{ trabajo.salarioMax }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.trabajo.tarea">Tarea</span></dt>
+        <dd>
+          <span *ngFor="let tarea of trabajo.tareas; let last = last">
+            <a [routerLink]="['/tarea', tarea.id, 'view']">{{ tarea.titulo }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.trabajo.empleado">Empleado</span></dt>
+        <dd>
+          <div *ngIf="trabajo.empleado">
+            <a [routerLink]="['/empleado', trabajo.empleado.id, 'view']">{{ trabajo.empleado.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/trabajo', trabajo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

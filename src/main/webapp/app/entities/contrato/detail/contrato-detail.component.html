@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="contrato">
+      <h2 data-cy="contratoDetailsHeading"><span jhiTranslate="jhipsterApp.contrato.detail.title">Contrato</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ contrato.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.fechaInicio">Fecha Inicio</span></dt>
+        <dd>
+          <span>{{ contrato.fechaInicio | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.fechaFin">Fecha Fin</span></dt>
+        <dd>
+          <span>{{ contrato.fechaFin | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.lenguaje">Lenguaje</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'jhipsterApp.Idioma.' + contrato.lenguaje }}">{{ contrato.lenguaje }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.trabajo">Trabajo</span></dt>
+        <dd>
+          <div *ngIf="contrato.trabajo">
+            <a [routerLink]="['/trabajo', contrato.trabajo.id, 'view']">{{ contrato.trabajo.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.departamento">Departamento</span></dt>
+        <dd>
+          <div *ngIf="contrato.departamento">
+            <a [routerLink]="['/departamento', contrato.departamento.id, 'view']">{{ contrato.departamento.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.contrato.empleado">Empleado</span></dt>
+        <dd>
+          <div *ngIf="contrato.empleado">
+            <a [routerLink]="['/empleado', contrato.empleado.id, 'view']">{{ contrato.empleado.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/contrato', contrato.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230210210932",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "tarea",
+  "fields": [
+    {
+      "fieldName": "titulo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Tarea",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "trabajo",
+      "otherEntityRelationshipName": "tarea",
+      "ownerSide": false,
+      "relationshipName": "trabajo",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

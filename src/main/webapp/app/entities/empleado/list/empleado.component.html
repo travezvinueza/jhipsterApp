@@ -1,0 +1,157 @@
+<div>
+  <h2 id="page-heading" data-cy="EmpleadoHeading">
+    <span jhiTranslate="jhipsterApp.empleado.home.title">Empleados</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterApp.empleado.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-empleado"
+        [routerLink]="['/empleado/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterApp.empleado.home.createLabel"> Crear nuevo Empleado </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="empleados?.length === 0">
+    <span jhiTranslate="jhipsterApp.empleado.home.notFound">Ningún Empleados encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="empleados && empleados.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nombres">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.nombres">Nombres</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="apellidos">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.apellidos">Apellidos</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="correo">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.correo">Correo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nroCelular">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.nroCelular">Nro Celular</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaContrato">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.fechaContrato">Fecha Contrato</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="salario">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.salario">Salario</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="comisionPorcentaje">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.comisionPorcentaje">Comision Porcentaje</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="inmediatosuperior.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.inmediatosuperior">Inmediatosuperior</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="departamento.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.empleado.departamento">Departamento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let empleado of empleados; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/empleado', empleado.id, 'view']">{{ empleado.id }}</a>
+          </td>
+          <td>{{ empleado.nombres }}</td>
+          <td>{{ empleado.apellidos }}</td>
+          <td>{{ empleado.correo }}</td>
+          <td>{{ empleado.nroCelular }}</td>
+          <td>{{ empleado.fechaContrato | formatMediumDatetime }}</td>
+          <td>{{ empleado.salario }}</td>
+          <td>{{ empleado.comisionPorcentaje }}</td>
+          <td>
+            <div *ngIf="empleado.inmediatosuperior">
+              <a [routerLink]="['/empleado', empleado.inmediatosuperior.id, 'view']">{{ empleado.inmediatosuperior.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="empleado.departamento">
+              <a [routerLink]="['/departamento', empleado.departamento.id, 'view']">{{ empleado.departamento.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/empleado', empleado.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/empleado', empleado.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(empleado)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

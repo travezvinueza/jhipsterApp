@@ -1,0 +1,93 @@
+
+entity Region {
+	nombreRegion String
+}
+
+entity Pais {
+	nombrePais String
+}
+
+// comentario de una linea
+/** comentario de un parrafo */
+entity Direccion {
+	calle String
+	codigoPostal String
+	ciudad String
+	provincia String
+}
+
+entity Departamento {
+	nombreDepartamento String required
+}
+
+entity Tarea {
+	titulo String
+	descripcion String
+}
+entity Empleado {
+	nombres String
+	apellidos String
+	correo String
+	nroCelular String
+	fechaContrato Instant
+	salario Long
+	comisionPorcentaje Long
+}
+
+entity Trabajo {
+	tituloTrabajo String
+	salarioMin Long
+	salarioMax Long
+}
+
+entity Contrato {
+	fechaInicio Instant
+	fechaFin Instant
+	lenguaje Idioma
+}
+
+enum Idioma {
+    ESPANOL, INGLES, PORTUGUES
+}
+
+relationship OneToOne {
+	Pais{region} to Region
+}
+
+relationship OneToOne {
+	Direccion{pais} to Pais
+}
+
+relationship OneToOne {
+	Departamento{direccion} to Direccion
+}
+
+relationship ManyToMany {
+	Trabajo{tarea(titulo)} to Tarea{trabajo}
+}
+
+relationship OneToMany {
+	Empleado to Trabajo{empleado}
+	Departamento to	Empleado{departamento}
+}
+
+relationship ManyToOne {
+	Empleado{inmediatosuperior} to Empleado
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	Contrato{trabajo} to Trabajo
+	Contrato{departamento} to Departamento
+	Contrato{empleado} to Empleado
+}
+
+// mostrar con scroll 
+paginate Contrato, Empleado with infinite-scroll
+paginate Trabajo with pagination
+
+// Insertar opciones basicas a todos menos a Empleado, trabajo 
+service all with serviceImpl except Empleado, Trabajo
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

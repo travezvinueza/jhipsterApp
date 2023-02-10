@@ -1,0 +1,140 @@
+<div>
+  <h2 id="page-heading" data-cy="ContratoHeading">
+    <span jhiTranslate="jhipsterApp.contrato.home.title">Contratoes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="jhipsterApp.contrato.home.refreshListLabel">Refrescar lista</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-contrato"
+        [routerLink]="['/contrato/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="jhipsterApp.contrato.home.createLabel"> Crear nuevo Contrato </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="contratoes?.length === 0">
+    <span jhiTranslate="jhipsterApp.contrato.home.notFound">Ningún Contratoes encontrado</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="contratoes && contratoes.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaInicio">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.fechaInicio">Fecha Inicio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fechaFin">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.fechaFin">Fecha Fin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="lenguaje">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.lenguaje">Lenguaje</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="trabajo.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.trabajo">Trabajo</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="departamento.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.departamento">Departamento</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="empleado.id">
+            <div class="d-flex">
+              <span jhiTranslate="jhipsterApp.contrato.empleado">Empleado</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let contrato of contratoes; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/contrato', contrato.id, 'view']">{{ contrato.id }}</a>
+          </td>
+          <td>{{ contrato.fechaInicio | formatMediumDatetime }}</td>
+          <td>{{ contrato.fechaFin | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'jhipsterApp.Idioma.' + contrato.lenguaje }}">{{ contrato.lenguaje }}</td>
+          <td>
+            <div *ngIf="contrato.trabajo">
+              <a [routerLink]="['/trabajo', contrato.trabajo.id, 'view']">{{ contrato.trabajo.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="contrato.departamento">
+              <a [routerLink]="['/departamento', contrato.departamento.id, 'view']">{{ contrato.departamento.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="contrato.empleado">
+              <a [routerLink]="['/empleado', contrato.empleado.id, 'view']">{{ contrato.empleado.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/contrato', contrato.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">Vista</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/contrato', contrato.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Editar</span>
+              </button>
+
+              <button type="submit" (click)="delete(contrato)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Eliminar</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

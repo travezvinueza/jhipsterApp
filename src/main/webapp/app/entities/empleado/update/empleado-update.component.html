@@ -1,0 +1,129 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-empleado-heading" data-cy="EmpleadoCreateUpdateHeading" jhiTranslate="jhipsterApp.empleado.home.createOrEditLabel">
+        Crear o editar Empleado
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.nombres" for="field_nombres">Nombres</label>
+          <input type="text" class="form-control" name="nombres" id="field_nombres" data-cy="nombres" formControlName="nombres" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.apellidos" for="field_apellidos">Apellidos</label>
+          <input type="text" class="form-control" name="apellidos" id="field_apellidos" data-cy="apellidos" formControlName="apellidos" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.correo" for="field_correo">Correo</label>
+          <input type="text" class="form-control" name="correo" id="field_correo" data-cy="correo" formControlName="correo" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.nroCelular" for="field_nroCelular">Nro Celular</label>
+          <input
+            type="text"
+            class="form-control"
+            name="nroCelular"
+            id="field_nroCelular"
+            data-cy="nroCelular"
+            formControlName="nroCelular"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.fechaContrato" for="field_fechaContrato">Fecha Contrato</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaContrato"
+              data-cy="fechaContrato"
+              type="datetime-local"
+              class="form-control"
+              name="fechaContrato"
+              formControlName="fechaContrato"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.salario" for="field_salario">Salario</label>
+          <input type="number" class="form-control" name="salario" id="field_salario" data-cy="salario" formControlName="salario" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.comisionPorcentaje" for="field_comisionPorcentaje"
+            >Comision Porcentaje</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="comisionPorcentaje"
+            id="field_comisionPorcentaje"
+            data-cy="comisionPorcentaje"
+            formControlName="comisionPorcentaje"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.inmediatosuperior" for="field_inmediatosuperior"
+            >Inmediatosuperior</label
+          >
+          <select
+            class="form-control"
+            id="field_inmediatosuperior"
+            data-cy="inmediatosuperior"
+            name="inmediatosuperior"
+            formControlName="inmediatosuperior"
+            [compareWith]="compareEmpleado"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleadosSharedCollection">{{ empleadoOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.empleado.departamento" for="field_departamento">Departamento</label>
+          <select
+            class="form-control"
+            id="field_departamento"
+            data-cy="departamento"
+            name="departamento"
+            formControlName="departamento"
+            [compareWith]="compareDepartamento"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="departamentoOption" *ngFor="let departamentoOption of departamentosSharedCollection">
+              {{ departamentoOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

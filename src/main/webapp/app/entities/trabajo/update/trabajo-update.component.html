@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-trabajo-heading" data-cy="TrabajoCreateUpdateHeading" jhiTranslate="jhipsterApp.trabajo.home.createOrEditLabel">
+        Crear o editar Trabajo
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.trabajo.tituloTrabajo" for="field_tituloTrabajo">Titulo Trabajo</label>
+          <input
+            type="text"
+            class="form-control"
+            name="tituloTrabajo"
+            id="field_tituloTrabajo"
+            data-cy="tituloTrabajo"
+            formControlName="tituloTrabajo"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.trabajo.salarioMin" for="field_salarioMin">Salario Min</label>
+          <input
+            type="number"
+            class="form-control"
+            name="salarioMin"
+            id="field_salarioMin"
+            data-cy="salarioMin"
+            formControlName="salarioMin"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.trabajo.salarioMax" for="field_salarioMax">Salario Max</label>
+          <input
+            type="number"
+            class="form-control"
+            name="salarioMax"
+            id="field_salarioMax"
+            data-cy="salarioMax"
+            formControlName="salarioMax"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label jhiTranslate="jhipsterApp.trabajo.tarea" for="field_tareas">Tarea</label>
+          <select
+            class="form-control"
+            id="field_tareas"
+            data-cy="tarea"
+            multiple
+            name="tareas"
+            formControlName="tareas"
+            [compareWith]="compareTarea"
+          >
+            <option [ngValue]="tareaOption" *ngFor="let tareaOption of tareasSharedCollection">{{ tareaOption.titulo }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.trabajo.empleado" for="field_empleado">Empleado</label>
+          <select
+            class="form-control"
+            id="field_empleado"
+            data-cy="empleado"
+            name="empleado"
+            formControlName="empleado"
+            [compareWith]="compareEmpleado"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="empleadoOption" *ngFor="let empleadoOption of empleadosSharedCollection">{{ empleadoOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

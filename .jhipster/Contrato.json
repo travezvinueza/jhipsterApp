@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20230210210935",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "contrato",
+  "fields": [
+    {
+      "fieldName": "fechaInicio",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaFin",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "lenguaje",
+      "fieldType": "Idioma",
+      "fieldValues": "ESPANOL,INGLES,PORTUGUES"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Contrato",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "trabajo",
+      "ownerSide": true,
+      "relationshipName": "trabajo",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "departamento",
+      "ownerSide": true,
+      "relationshipName": "departamento",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "empleado",
+      "ownerSide": true,
+      "relationshipName": "empleado",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

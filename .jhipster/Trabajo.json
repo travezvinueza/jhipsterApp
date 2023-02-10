@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20230210210934",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "trabajo",
+  "fields": [
+    {
+      "fieldName": "tituloTrabajo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "salarioMin",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "salarioMax",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Trabajo",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "titulo",
+      "otherEntityName": "tarea",
+      "otherEntityRelationshipName": "trabajo",
+      "ownerSide": true,
+      "relationshipName": "tarea",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "empleado",
+      "otherEntityRelationshipName": "trabajo",
+      "relationshipName": "empleado",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

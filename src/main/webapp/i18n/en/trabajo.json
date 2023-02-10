@@ -1,0 +1,28 @@
+{
+  "jhipsterApp": {
+    "trabajo": {
+      "home": {
+        "title": "Trabajos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Trabajo",
+        "createOrEditLabel": "Create or edit a Trabajo",
+        "notFound": "No Trabajos found"
+      },
+      "created": "A new Trabajo is created with identifier {{ param }}",
+      "updated": "A Trabajo is updated with identifier {{ param }}",
+      "deleted": "A Trabajo is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Trabajo {{ id }}?"
+      },
+      "detail": {
+        "title": "Trabajo"
+      },
+      "id": "ID",
+      "tituloTrabajo": "Titulo Trabajo",
+      "salarioMin": "Salario Min",
+      "salarioMax": "Salario Max",
+      "tarea": "Tarea",
+      "empleado": "Empleado"
+    }
+  }
+}

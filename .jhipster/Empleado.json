@@ -1,0 +1,62 @@
+{
+  "applications": "*",
+  "changelogDate": "20230210210933",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "empleado",
+  "fields": [
+    {
+      "fieldName": "nombres",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "apellidos",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "correo",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nroCelular",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fechaContrato",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "salario",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "comisionPorcentaje",
+      "fieldType": "Long"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Empleado",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "trabajo",
+      "otherEntityRelationshipName": "empleado",
+      "relationshipName": "trabajo",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "empleado",
+      "relationshipName": "inmediatosuperior",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "departamento",
+      "otherEntityRelationshipName": "empleado",
+      "relationshipName": "departamento",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

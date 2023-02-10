@@ -1,0 +1,26 @@
+{
+  "jhipsterApp": {
+    "tarea": {
+      "home": {
+        "title": "Tareas",
+        "refreshListLabel": "Refrescar lista",
+        "createLabel": "Crear nuevo Tarea",
+        "createOrEditLabel": "Crear o editar Tarea",
+        "notFound": "Ningún Tareas encontrado"
+      },
+      "created": "Un nuevo Tarea ha sido creado con el identificador {{ param }}",
+      "updated": "Un Tarea ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Tarea ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Tarea {{ id }}?"
+      },
+      "detail": {
+        "title": "Tarea"
+      },
+      "id": "ID",
+      "titulo": "Titulo",
+      "descripcion": "Descripcion",
+      "trabajo": "Trabajo"
+    }
+  }
+}

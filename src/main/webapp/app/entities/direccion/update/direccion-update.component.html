@@ -1,0 +1,69 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-direccion-heading" data-cy="DireccionCreateUpdateHeading" jhiTranslate="jhipsterApp.direccion.home.createOrEditLabel">
+        Crear o editar Direccion
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.direccion.calle" for="field_calle">Calle</label>
+          <input type="text" class="form-control" name="calle" id="field_calle" data-cy="calle" formControlName="calle" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.direccion.codigoPostal" for="field_codigoPostal">Codigo Postal</label>
+          <input
+            type="text"
+            class="form-control"
+            name="codigoPostal"
+            id="field_codigoPostal"
+            data-cy="codigoPostal"
+            formControlName="codigoPostal"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.direccion.ciudad" for="field_ciudad">Ciudad</label>
+          <input type="text" class="form-control" name="ciudad" id="field_ciudad" data-cy="ciudad" formControlName="ciudad" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.direccion.provincia" for="field_provincia">Provincia</label>
+          <input type="text" class="form-control" name="provincia" id="field_provincia" data-cy="provincia" formControlName="provincia" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="jhipsterApp.direccion.pais" for="field_pais">Pais</label>
+          <select class="form-control" id="field_pais" data-cy="pais" name="pais" formControlName="pais" [compareWith]="comparePais">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="paisOption" *ngFor="let paisOption of paisSharedCollection">{{ paisOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancelar</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Guardar</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

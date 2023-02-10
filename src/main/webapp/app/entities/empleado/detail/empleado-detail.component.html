@@ -1,0 +1,68 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="empleado">
+      <h2 data-cy="empleadoDetailsHeading"><span jhiTranslate="jhipsterApp.empleado.detail.title">Empleado</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ empleado.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.nombres">Nombres</span></dt>
+        <dd>
+          <span>{{ empleado.nombres }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.apellidos">Apellidos</span></dt>
+        <dd>
+          <span>{{ empleado.apellidos }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.correo">Correo</span></dt>
+        <dd>
+          <span>{{ empleado.correo }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.nroCelular">Nro Celular</span></dt>
+        <dd>
+          <span>{{ empleado.nroCelular }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.fechaContrato">Fecha Contrato</span></dt>
+        <dd>
+          <span>{{ empleado.fechaContrato | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.salario">Salario</span></dt>
+        <dd>
+          <span>{{ empleado.salario }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.comisionPorcentaje">Comision Porcentaje</span></dt>
+        <dd>
+          <span>{{ empleado.comisionPorcentaje }}</span>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.inmediatosuperior">Inmediatosuperior</span></dt>
+        <dd>
+          <div *ngIf="empleado.inmediatosuperior">
+            <a [routerLink]="['/empleado', empleado.inmediatosuperior.id, 'view']">{{ empleado.inmediatosuperior.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="jhipsterApp.empleado.departamento">Departamento</span></dt>
+        <dd>
+          <div *ngIf="empleado.departamento">
+            <a [routerLink]="['/departamento', empleado.departamento.id, 'view']">{{ empleado.departamento.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Volver</span>
+      </button>
+
+      <button type="button" [routerLink]="['/empleado', empleado.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Editar</span>
+      </button>
+    </div>
+  </div>
+</div>
